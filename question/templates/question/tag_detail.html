@@ -1,0 +1,9 @@
+{% extends 'question/base.html' %}
+
+{% block content %}
+  <div class="tag-headline">Questions tagged &nbsp;<strong> {{ tag.title }}</strong></div>
+  {% for question in questions %}
+    {% include 'question/question.html' with truncate_questions=True %}
+  {% endfor %}
+  {% include 'question/pagination.html' with pages=page_obj %}
+{% endblock %}

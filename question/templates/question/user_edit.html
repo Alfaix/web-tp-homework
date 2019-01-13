@@ -1,0 +1,99 @@
+{% extends 'question/base.html' %}
+
+{% block content %}
+  <div class="user-profile">
+    <form action="" method="post" data-js="user-edit">
+      {% csrf_token %}
+      <div class="form-group row">
+        <label for="id_username" class="col-3 col-form-label">Username: </label>
+        <div class="col-9">
+          <input class="form-control" type="text" placeholder="Username" id="id_username" name="username"
+                 value="{{ user.username }}">
+          <span class="alert form-help form-text" id="id_username-help" style="display: none">
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="id_email" class="col-3 col-form-label">Email: </label>
+        <div class="col-9">
+          <input class="form-control" type="email" placeholder="Email" id="id_email" name="email"
+                 value="{{ user.email }}">
+          <span class="alert form-help form-text" id="id_email-help" style="display: none">
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="id_first_name" class="col-3 col-form-label">First name: </label>
+        <div class="col-9">
+          <input class="form-control" type="text" placeholder="First name" id="id_first_name" name="first_name"
+                 value="{{ user.first_name }}">
+          <span class="alert form-text form-help" id="id_first_name-help" style="display: none">
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="id_last_name" class="col-3 col-form-label">Last name: </label>
+        <div class="col-9">
+          <input class="form-control" type="text" placeholder="Last name" id="id_last_name" name="last_name"
+                 value="{{ user.last_name }}">
+          <span class="alert form-text form-help" id="id_last_name-help" style="display: none">
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="id_upload" class="col-3 col-form-label">Profile picture: </label>
+        <div class="col-9">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" accept="image/png,image/jpeg,image/gif"
+                   id="id_upload" name="upload">
+            <label class="custom-file-label" for="id_upload">Choose profile picture</label>
+          </div>
+          <span class="alert form-text form-help" id="id_upload-help" style="display: none">
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="id_new_password" class="col-3 col-form-label">New password: </label>
+        <div class="col-9">
+          <input class="form-control" type="password" id="id_new_password" name="new_password">
+          <span class="alert form-text form-help" id="id_new_password-help" style="display: none">
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="id_new_password_repeat" class="col-3 col-form-label">Confirm password: </label>
+        <div class="col-9">
+          <input class="form-control" type="password" id="id_new_password_repeat" name="new_password_repeat">
+          <span class="alert form-text form-help" id="id_new_password_repeat-help" style="display: none">
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="id_password" class="col-3 col-form-label">Old password: </label>
+        <div class="col-9">
+          <input class="form-control" type="password" placeholder="Only needed if you changed your password"
+                 id="id_password" name="password">
+          <span class="alert form-text form-help" id="id_password-help" style="display: none">
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-9 offset-3">
+          <div class="alert alert-danger" style="display:none" role="alert" id="edit_profile_help">
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Save changes</button>
+            </div>
+            <div class="col-4">
+              <button type="reset" class="btn btn-secondary btn-block">Reset</button>
+            </div>
+            <div class="col-4">
+              <button type="submit" value="delete" class="btn btn-danger btn-block">Delete account</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}

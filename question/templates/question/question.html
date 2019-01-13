@@ -1,0 +1,53 @@
+{% load filters %}
+
+<div class="row question-item">
+  <div class="col-2">
+    <img src="/{{ question.author.image_path }}" alt="" class="question-item__avatar">
+    <h5 class="question-item__question-author">
+      <a href="{% url 'question:profile-view' pk=question.author.id %}" class="color-primary-3">
+        {{ question.author.first_name }} {{ question.author.last_name }}
+      </a>
+    </h5>
+    <div class="question-item__rating-box">
+      <div class="question-item__rating-box__voting-box">
+        <div data-js="question-upvote" data-id="{{ question.pk }}" data-url="{% url 'question:ajax_question_upvote' question.pk %}" class="oi oi-caret-top question-item__rating-vote color-primary-3" title="Upvote" aria-hidden="true"></div>
+        <div data-js="question-downvote" data-id="{{ question.pk }}" data-url="{% url 'question:ajax_question_downvote' question.pk %}" class="oi oi-caret-bottom question-item__rating-vote color-primary-3" title="Downvote" aria-hidden="true"></div>
+      </div>
+      <div class="question-item__rating-number color-primary-3" data-js="question-rating-{{ question.pk }}"> {{ question.rating }} </div>
+    </div>
+  </div>
+  <div class="col-10">
+    <h3>
+      <a href="{% url 'question:question-view' question.id %}" class="question-item__question-title color-primary-3">
+        {{ question.title }}
+      </a>
+    </h3>
+    <p>
+      {% if truncate_questions %}
+        {{ question.text  | truncatewords:"50" | linebreaks }}
+        <a href="{% url 'question:question-view' question.id %}">Read more</a>
+      {% else %}
+        {{ question.text  | linebreaks }}
+      {% endif %}
+    </p>
+    <div class="row">
+      <div class="col-12">
+        <ul class="list-inline question-item__question-tag-list">
+          <strong>Tags</strong>:
+          {% for tag in question.tags.all %}
+            <li class="list-inline-item question-item__question-tag-item">
+              <a href="{% url 'question:tag-view' pk=tag.pk %}">{{ tag.title | bootstrap_truncate:20 }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-7"><a href="{% url 'question:question-view' question.pk %}">Answers
+        ({{ question.n_answers }})</a></div>
+      <div class="col-5 question-item__question-datetime">
+        {{ question.create_date }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+{% block top_users %}
+  <div class="right-block">
+    <ul class="list-group users-list">
+      <li class="list-group-item list-group-item-primary users-list-item users-list-heading color-primary-3">
+        Our Top Users
+      </li>
+      {% for user in base.top_users %}
+        <li class="list-group-item users-list-item">
+          <a href="{% url 'question:profile-view' pk=user.id %}" class="color-primary-3">
+            {{ user.first_name }} {{ user.last_name }} ({{ user.rating }})
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

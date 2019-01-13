@@ -1,0 +1,24 @@
+<form data-js="form-login" class="form" role="form" method="post" action={% url 'question:login-view' %} accept-charset="UTF-8" id="login-nav">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="sr-only" for="id_login_username">Email address</label>
+        <input type="text" name="username" class="form-control" id="id_login_username" placeholder="Username" required>
+        <small id="password-help" style="display: none;" class="form-help text-danger">Ошибка.</small>
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="id_login_password">Password</label>
+        <input type="password" name="password" class="form-control" id="id_login_password" placeholder="Password" required>
+        <small id="password-help" style="display: none;" class="form-help text-danger">Ошибка.</small>
+    </div>
+{#    <div class="checkbox">#}
+{#        <label>#}
+{#            <input type="checkbox" name="remember_me" value="1"> Remember me#}
+{#        </label>#}
+{#    </div>#}
+    <div class="alert alert-danger form-help" id="login-form-help" role="alert" style="display: none">
+        Invalid username or password.
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+    </div>
+</form>

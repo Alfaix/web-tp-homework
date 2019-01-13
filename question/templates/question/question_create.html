@@ -1,0 +1,50 @@
+{% extends 'question/base.html' %}
+
+{% block content %}
+
+  <div class="create-question-form">
+    <h2 class="create-question-form__title">Ask a new question</h2>
+    <form action="{% url 'question:new-question-view' %}" method="post" data-js="question-create">
+      {% csrf_token %}
+      <div class="form-group row">
+        <label for="id_title" class="col-3 col-form-label">Title: </label>
+        <div class="col-9">
+          <input class="form-control" type="text" placeholder="Title" id="id_title" name="title">
+          <span class="form-help form-text text-danger" id="id_title-help" style="display:none;">
+
+        </span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="id_text" class="col-3 col-form-label">Text: </label>
+        <div class="col-9">
+          <textarea class="form-control" id="id_text" name="text" rows="5"
+                    placeholder="What does the fox say?"></textarea>
+           <span class="form-help form-text text-danger" id="id_text-help" style="display:none;">
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="id_tags" class="col-3 col-form-label">Tags, separated by comma: </label>
+        <div class="col-9">
+          <input class="form-control" type="text" placeholder="E.g. Python, Django, web development"
+                 id="id_tags" name="tags">
+          <span class="form-help form-text text-danger" id="id_tags-help" style="display:none;">
+
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-9 offset-3">
+          <div class="alert alert-danger" role="alert" style="display:none;">
+            Now you screwed up!
+          </div>
+          <button type="submit" class="btn btn-primary">Publish question</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+{% endblock %}

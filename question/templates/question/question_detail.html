@@ -1,0 +1,54 @@
+{% extends 'question/base.html' %}
+{% load static %}
+{% load filters %}
+{% block content %}
+  {% include 'question/question.html'  with truncate_question=false %}
+
+  {% for answer in answers %}
+    <div class="row">
+      <div class="col-11 offset-1">
+        <div class="row answer-item" id="answer_{{ answer.pk }}">
+          <div class="col-2">
+            <img src="/{{ answer.author.image_path }}" alt="" class="answer-item__avatar">
+            <h5 class="answer-item__answer-author">
+              <a href="{% url 'question:profile-view' pk=answer.author.id %}" class="color-primary-3">
+                {{ answer.author.first_name }} {{ answer.author.last_name }}
+              </a>
+            </h5>
+            <div class="answer-item__rating-box">
+              <div class="oi oi-caret-top answer-item__rating-vote color-primary-3" data-js="answer-upvote" data-id="{{ answer.pk }}" data-url="{% url 'question:ajax_answer_upvote' answer.pk %}" title="caret top"
+                   aria-hidden="true"></div>
+              <div class="answer-item__rating-number color-primary-3" data-js="answer-rating-{{ answer.pk }}"> {{ answer.rating }} </div>
+              <div class="oi oi-caret-bottom answer-item__rating-vote color-primary-3" data-js="answer-downvote" data-id="{{ answer.pk }}" data-url="{% url 'question:ajax_answer_downvote' answer.pk %}" title="caret top"
+                   aria-hidden="true"></div>
+            </div>
+          </div>
+          <div class="col-10">
+            <p class="answer-item__answer-body">{{ answer.text }}</p>
+            <div class="row">
+              <div class="col-7"></div>
+              <div class="col-5 answer-item__answer-datetime">
+                {{ answer.create_date }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  {% include 'question/pagination.html' with pages=page_obj %}
+  {% if user.is_authenticated %}
+  <div class="row">
+    <form method="post" action="" class="col-11 offset-1" data-js="answer_form">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_answer_text"> <strong>Answer here: </strong></label>
+        <textarea class="form-control" id="id_answer_text" rows="5" name="text"></textarea>
+        <span class="form-help form-text text-danger" id="id_answer_text-help" style="display:none;">
+        </span>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  {% endif %}
+{% endblock %}
